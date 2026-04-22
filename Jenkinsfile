@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_CREDENTIALS = 'Docker-credentials'
+        DOCKERHUB_CREDENTIALS = 'C3'
         IMAGE_NAME = 'nisanth05/new_docker_image'
     }
 
@@ -10,7 +10,7 @@ pipeline {
 
         stage('Build Java Application') {
             steps {
-                bat 'javac HelloWorld.java'
+                bat 'javac hello.java'
             }
         }
 
@@ -29,11 +29,11 @@ pipeline {
         stage('Login to DockerHub') {
             steps {
                 withCredentials([usernamePassword(
-                credentialsId: 'Docker-credentials',
+                credentialsId: 'C3',
                 usernameVariable: 'USER',
                 passwordVariable: 'PASS')]) {
 
-                    bat 'echo %PASS%| docker login -u %USER% --password-stdin'
+                    bat 'echo %PASS%|| docker login -u %USER% --password-stdin'
                 }
             }
         }
